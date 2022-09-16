@@ -1,0 +1,28 @@
+<div class="container">
+  <h3>User Data</h3>
+  <table class="table table-bordered">
+    <tr>
+      <th>Id</th>
+      <th>Name</th>
+      <th>Age</th>
+      <th>Email</th>
+      <th>Action</th>
+    </tr>
+    <tr *ngFor="let data of users">
+      <td>{{ data.id }}</td>
+      <td>{{ data.firstName }} {{ data.lastName }}</td>
+      <td>{{ data.age }}</td>
+      <td>{{ data.email }}</td>
+      <td>
+        <button
+          class="btn btn-outline-primary"
+          [routerLink]="['/details', data.id]"
+        >
+          View</button
+        ><button class="btn btn-outline-danger" (click)="deleterow(data.id)">
+          Delete
+        </button>
+      </td>
+    </tr>
+  </table>
+</div>

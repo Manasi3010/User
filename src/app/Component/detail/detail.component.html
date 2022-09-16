@@ -1,0 +1,339 @@
+<div>
+  <button class="btn btn-primary" style="margin-left: 40%" (click)="back()">
+    Back to Home
+  </button>
+</div>
+<div class="container" id="details" *ngIf="selecteduser">
+  <div class="container1">
+    <img class="img-thumbnail" src="{{ selecteduser.image }}" />
+  </div>
+  <div class="container2">
+    <label>Name:{{ selecteduser.firstName }} {{ selecteduser.lastName }}</label>
+    <br />
+    <label>Age:{{ selecteduser.age }}</label>
+    <br />
+    <label>Email:{{ selecteduser.email }}</label>
+    <br />
+    <label>MacAddress:{{ selecteduser.macAddress }}</label>
+    <br />
+    <label>Gender:{{ selecteduser.gender }}</label>
+    <br />
+    <label>BirthDate:{{ selecteduser.birthDate }}</label>
+    <br />
+    <button
+      type="button"
+      class="btn btn-success btn-sm"
+      style="margin: top 10px; padding: 5px"
+      (click)="showDetails()"
+    >
+      Details
+    </button>
+    <button
+      style="margin: 20px; padding: 5px"
+      type="button"
+      (click)="openPopup()"
+      class="btn btn-success"
+    >
+      Edit
+    </button>
+    <div
+      class="modal"
+      tabindex="-1"
+      role="dialog"
+      [ngStyle]="{ display: displayStyle }"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">User Details</h4>
+          </div>
+          <div class="modal-body">
+            <form [formGroup]="userForm" (ngSubmit)="saveData()">
+              <div class="form-group" formGroupName="personal">
+                <mat-form-field class="example-full-width">
+                  <mat-label>Name:</mat-label>
+                  <input
+                    matInput
+                    formControlName="firstName"
+                  /> </mat-form-field
+                >&nbsp;&nbsp;
+                <mat-form-field class="example-full-width">
+                  <mat-label>Age:</mat-label>
+                  <input matInput formControlName="age" />
+                </mat-form-field>
+                <br />
+                <mat-form-field class="example-full-width">
+                  <mat-label>Email:</mat-label>
+                  <input matInput formControlName="email" /> </mat-form-field
+                >&nbsp;&nbsp;
+                <mat-form-field class="example-full-width">
+                  <mat-label>BirthDate:</mat-label>
+                  <input matInput formControlName="birthDate" />
+                </mat-form-field>
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-danger"
+                  (click)="closePopup()"
+                >
+                  Close
+                </button>
+                <button type="submit" class="btn btn-danger">Save</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container3">
+    <mat-tab-group animationDuration="2000ms" *ngIf="details">
+      <mat-tab label="Address">
+        <form>
+          <label> Address:{{ selecteduser.address.address }} </label
+          ><br /><label> City:{{ selecteduser.address.city }}</label>
+          <label>
+            <br />Postal Code:{{ selecteduser.address.postalCode }}</label
+          >
+          <br />
+          <label> State:{{ selecteduser.address.state }}</label>
+          <br />
+          <button
+            style="margin: 50px; padding: 10px"
+            type="button"
+            (click)="openPopup2()"
+            class="btn btn-success"
+          >
+            Edit
+          </button>
+          <div
+            class="modal"
+            tabindex="-1"
+            role="dialog"
+            [ngStyle]="{ display: displayStyle2 }"
+          >
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title">Address Details</h4>
+                </div>
+                <div class="modal-body">
+                  <form [formGroup]="userForm" (ngSubmit)="saveData()">
+                    <div class="form-group" formGroupName="address">
+                      <mat-form-field class="example-full-width">
+                        <mat-label>Address:</mat-label>
+                        <input
+                          matInput
+                          formControlName="address"
+                        /> </mat-form-field
+                      >&nbsp;&nbsp;
+                      <mat-form-field class="example-full-width">
+                        <mat-label>City:</mat-label>
+                        <input matInput formControlName="city" />
+                      </mat-form-field>
+                      <br />
+                      <mat-form-field class="example-full-width">
+                        <mat-label>State:</mat-label>
+                        <input
+                          matInput
+                          formControlName="state"
+                        /> </mat-form-field
+                      >&nbsp;&nbsp;
+                      <mat-form-field class="example-full-width">
+                        <mat-label>PostalCode:</mat-label>
+                        <input matInput formControlName="postalcode" />
+                      </mat-form-field>
+                    </div>
+                    <div class="modal-footer">
+                      <button
+                        type="button"
+                        class="btn btn-danger"
+                        (click)="closePopup2()"
+                      >
+                        Close
+                      </button>
+                      <button type="submit" class="btn btn-danger">Save</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </mat-tab>
+      <mat-tab label="Bank">
+        <form>
+          <label>CardExpire:{{ selecteduser.bank.cardExpire }}</label>
+          <br />
+          <label>CardNumber:{{ selecteduser.bank.cardNumber }}</label>
+          <br />
+          <label>CardType:{{ selecteduser.bank.cardType }}</label>
+          <br />
+          <label>Currency:{{ selecteduser.bank.currency }}</label>
+          <br />
+          <label>iban:{{ selecteduser.bank.iban }}</label>
+          <br />
+          <button
+            style="margin: 50px; padding: 10px"
+            type="button"
+            (click)="openPopup1()"
+            class="btn btn-success"
+          >
+            Edit
+          </button>
+          <div
+            class="modal"
+            tabindex="-1"
+            role="dialog"
+            [ngStyle]="{ display: displayStyle1 }"
+          >
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title">Bank</h4>
+                </div>
+                <div class="modal-body">
+                  <form [formGroup]="userForm" (ngSubmit)="saveData()">
+                    <div class="form-group" formGroupName="bank">
+                      <mat-form-field class="example-full-width">
+                        <mat-label>CardNumber:</mat-label>
+                        <input
+                          matInput
+                          formControlName="cardnum"
+                        /> </mat-form-field
+                      >&nbsp;&nbsp;
+                      <mat-form-field class="example-full-width">
+                        <mat-label>CardType:</mat-label>
+                        <input matInput formControlName="cardtype" />
+                      </mat-form-field>
+                      <br />
+                      <mat-form-field class="example-full-width">
+                        <mat-label>CardExpire:</mat-label>
+                        <input
+                          matInput
+                          formControlName="cardexpire"
+                        /> </mat-form-field
+                      >&nbsp;&nbsp;
+                      <mat-form-field class="example-full-width">
+                        <mat-label>Currency:</mat-label>
+                        <input matInput formControlName="currency" />
+                      </mat-form-field>
+                      <mat-form-field class="example-full-width">
+                        <mat-label>iban:</mat-label>
+                        <input matInput formControlName="iban" />
+                      </mat-form-field>
+                    </div>
+                    <div class="modal-footer">
+                      <button
+                        type="button"
+                        class="btn btn-danger"
+                        (click)="closePopup1()"
+                      >
+                        Close
+                      </button>
+                      <button type="submit" class="btn btn-danger">Save</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </mat-tab>
+      <mat-tab label="Company">
+        <form>
+          <label>Adress:{{ selecteduser.company.address.address }}</label>
+          <br />
+          <!-- <label>City:{{ selecteduser.company.address.city }}</label>
+          <br /> -->
+          <label
+            >Postal Code:{{ selecteduser.company.address.postalCode }}</label
+          >
+          <br />
+          <label>State:{{ selecteduser.company.address.state }}</label>
+          <br />
+          <label>Department:{{ selecteduser.company.department }}</label>
+          <br />
+          <label
+            >selecteduser.company Name:{{ selecteduser.company.name }}</label
+          >
+          <br />
+          <label>Title:{{ selecteduser.company.title }}</label>
+          <button
+            style="margin: 50px; padding: 10px"
+            type="button"
+            (click)="openPopup3()"
+            class="btn btn-success"
+          >
+            Edit
+          </button>
+          <div
+            class="modal"
+            tabindex="-1"
+            role="dialog"
+            [ngStyle]="{ display: displayStyle3 }"
+          >
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title">CompanyAddress Details</h4>
+                </div>
+                <div class="modal-body">
+                  <form [formGroup]="userForm" (ngSubmit)="saveData()">
+                    <div class="form-group" formGroupName="companyAddress">
+                      <mat-form-field class="example-full-width">
+                        <mat-label>Address:</mat-label>
+                        <input
+                          matInput
+                          formControlName="address"
+                        /> </mat-form-field
+                      >&nbsp;&nbsp;
+                      <mat-form-field class="example-full-width">
+                        <mat-label>City:</mat-label>
+                        <input matInput formControlName="city" />
+                      </mat-form-field>
+                      <br />
+                      <mat-form-field class="example-full-width">
+                        <mat-label>State:</mat-label>
+                        <input
+                          matInput
+                          formControlName="state"
+                        /> </mat-form-field
+                      >&nbsp;&nbsp;
+                      <mat-form-field class="example-full-width">
+                        <mat-label>PostalCode:</mat-label>
+                        <input matInput formControlName="postalcode" />
+                      </mat-form-field>
+                      <mat-form-field class="example-full-width">
+                        <mat-label>Department:</mat-label>
+                        <input
+                          matInput
+                          formControlName="department"
+                        /> </mat-form-field
+                      >&nbsp;&nbsp;
+                      <mat-form-field class="example-full-width">
+                        <mat-label>Title:</mat-label>
+                        <input matInput formControlName="title" />
+                      </mat-form-field>
+                    </div>
+                    <div class="modal-footer">
+                      <button
+                        type="button"
+                        class="btn btn-danger"
+                        (click)="closePopup3()"
+                      >
+                        Close
+                      </button>
+                      <button type="submit" class="btn btn-danger">Save</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</div>
